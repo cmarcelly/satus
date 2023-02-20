@@ -6,6 +6,7 @@ import { project } from 'pages/_app'
 import { Suspense, useEffect, useRef } from 'react'
 import { PostProcessing } from './post-processing'
 import { Raf } from './raf'
+import s from './webgl.module.scss'
 
 // https://docs.pmnd.rs/
 
@@ -51,23 +52,25 @@ export function WebGL({ onLoad = () => {} }) {
   }, [])
 
   return (
-    <Canvas
-      gl={{
-        powerPreference: 'high-performance',
-        antialias: false,
-        alpha: true,
-        preserveDrawingBuffer: true,
-      }}
-      dpr={[1, 2]}
-    >
-      <SheetProvider sheet={sheet}>
-        <Raf render={true} />
-        <Suspense>
-          <PostProcessing>
-            <Demo />
-          </PostProcessing>
-        </Suspense>
-      </SheetProvider>
-    </Canvas>
+    <div className={s.canvas}>
+      <Canvas
+        gl={{
+          powerPreference: 'high-performance',
+          antialias: false,
+          alpha: true,
+          preserveDrawingBuffer: true,
+        }}
+        dpr={[1, 2]}
+      >
+        <SheetProvider sheet={sheet}>
+          <Raf render={true} />
+          <Suspense>
+            <PostProcessing>
+              <Demo />
+            </PostProcessing>
+          </Suspense>
+        </SheetProvider>
+      </Canvas>
+    </div>
   )
 }

@@ -1,9 +1,7 @@
-import { useDebug, useLayoutEffect } from '@studio-freight/hamo'
+import { useDebug } from '@studio-freight/hamo'
+import { useLenis } from '@studio-freight/react-lenis'
 import { raf } from '@studio-freight/tempus'
 import { getProject } from '@theatre/core'
-import extension from '@theatre/r3f/dist/extension'
-import studio from '@theatre/studio'
-import { PageTransition } from 'components/page-transition'
 import { RealViewport } from 'components/real-viewport'
 import state from 'config/state.json'
 import { gsap } from 'gsap'
@@ -17,15 +15,6 @@ import 'styles/global.scss'
 
 export const project = getProject('Satus', { state })
 
-gsap.registerPlugin(ScrollTrigger)
-
-// merge rafs
-gsap.ticker.lagSmoothing(0)
-gsap.ticker.remove(gsap.updateRoot)
-raf.add((time) => {
-  gsap.updateRoot(time / 1000)
-}, 0)
-
 const Stats = dynamic(
   () => import('components/stats').then(({ Stats }) => Stats),
   { ssr: false }
@@ -37,64 +26,43 @@ const GridDebugger = dynamic(
   { ssr: false }
 )
 
-// our Theatre.js project sheet, we'll use this later
-// const demoSheet = getProject('Demo Project').sheet('Demo Sheet')
+const Theatre = dynamic(
+  () => import('components/theatre').then(({ Theatre }) => Theatre),
+  { ssr: false }
+)
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+  ScrollTrigger.defaults({ markers: process.env.NODE_ENV === 'development' })
+
+  // merge rafs
+  gsap.ticker.lagSmoothing(0)
+  gsap.ticker.remove(gsap.updateRoot)
+  raf.add((time) => {
+    gsap.updateRoot(time / 1000)
+  }, 0)
+}
 
 function MyApp({ Component, pageProps }) {
   const debug = useDebug()
-  const lenis = useStore(({ lenis }) => lenis)
-  const overflow = useStore(({ overflow }) => overflow)
-
-  // const setHeaderData = useStore((state) => state.setHeaderData)
-  // const setFooterData = useStore((state) => state.setFooterData)
-
-  // const [isFetched, setIsFetched] = useState(false)
-
-  // avoid infinite loop
-  // if (!isFetched) {
-  //   setHeaderData(headerData)
-  //   setFooterData(footerData)
-  //   setIsFetched(true)
-  // }
+  const lenis = useLenis()
+  const navIsOpened = useStore(({ navIsOpened }) => navIsOpened)
 
   useEffect(() => {
-    if (overflow) {
-      lenis?.start()
-      document.documentElement.style.removeProperty('overflow')
-    } else {
+    if (navIsOpened) {
       lenis?.stop()
-      document.documentElement.style.setProperty('overflow', 'hidden')
+    } else {
+      lenis?.start()
     }
-  }, [lenis, overflow])
+  }, [lenis, navIsOpened])
 
-  useLayoutEffect(() => {
-    if (lenis) ScrollTrigger.refresh()
+  useEffect(() => {
+    ScrollTrigger.refresh()
   }, [lenis])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.history.scrollRestoration = 'manual'
   }, [])
-
-  ScrollTrigger.defaults({ markers: process.env.NODE_ENV === 'development' })
-
-  useEffect(() => {
-    //TODO: tree shake studio -> import only on debug mode
-    if (debug && !studio.__initialized) {
-      studio.initialize()
-      studio.extend(extension)
-      studio.__initialized = true
-
-      setTimeout(() => {
-        // lenis compatibility
-        const theatreDOM = document.querySelector('#theatrejs-studio-root')
-        if (theatreDOM) {
-          theatreDOM.addEventListener('wheel', (e) => {
-            e.stopPropagation()
-          })
-        }
-      }, 1000)
-    }
-  }, [debug])
 
   return (
     <>
@@ -102,6 +70,7 @@ function MyApp({ Component, pageProps }) {
         <>
           <GridDebugger />
           <Stats />
+          <Theatre />
         </>
       )}
       {/* Google Tag Manager - Global base code */}
@@ -124,7 +93,7 @@ function MyApp({ Component, pageProps }) {
           />
         </>
       )}
-      <PageTransition />
+      {/* <PageTransition /> */}
       <RealViewport />
       <Component {...pageProps} />
     </>

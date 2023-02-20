@@ -1,6 +1,5 @@
-import { useLayoutEffect } from '@studio-freight/hamo'
 import { gsap } from 'gsap'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 
 export function Parallax({
@@ -12,13 +11,14 @@ export function Parallax({
 }) {
   const trigger = useRef()
   const target = useRef()
-
+  const timeline = useRef()
   const { width: windowWidth } = useWindowSize()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const y = windowWidth * speed * 0.1
+    const mm = gsap.matchMedia()
 
-    const timeline = gsap
+    timeline.current = gsap
       .timeline({
         scrollTrigger: {
           id: id,
@@ -34,8 +34,22 @@ export function Parallax({
         { y: y, ease: 'none' }
       )
 
+    mm.add(
+      {
+        reduceMotion: '(prefers-reduced-motion: reduce)',
+      },
+      (context) => {
+        const { reduceMotion } = context.conditions
+
+        if (reduceMotion) {
+          timeline?.current?.from(target.current, { y: 0 })
+          timeline?.current?.kill()
+        }
+      }
+    )
+
     return () => {
-      timeline.kill()
+      timeline?.current?.kill()
     }
   }, [id, speed, position, windowWidth])
 

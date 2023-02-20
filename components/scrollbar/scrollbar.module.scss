@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   top: 0;
-  z-index: 10;
+  z-index: 4;
   padding: desktop-vw(24px) 0;
 
   .inner {
@@ -22,5 +22,9 @@
     border-radius: desktop-vw(4px);
     border: desktop-vw(1px) solid var(--black);
     cursor: grab;
+  }
+
+  @include mobile {
+    display: none;
   }
 }
