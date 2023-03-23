@@ -74,7 +74,9 @@
   "pnpm": {
     "overrides": {
       "react-is": "18.2.0",
-      "throttle-debounce": "5.0.0"
+      "throttle-debounce": "5.0.0",
+      "scheduler": "0.23.0",
+      "zustand": "4.3.6"
     }
   },
   "size-limit": [

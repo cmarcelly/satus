@@ -3,6 +3,8 @@ lockfileVersion: 5.4
 overrides:
   react-is: 18.2.0
   throttle-debounce: 5.0.0
+  scheduler: 0.23.0
+  zustand: 4.3.6
 
 specifiers:
   '@builder.io/partytown': ^0.7.6
@@ -38,7 +40,6 @@ specifiers:
   next-pwa: 5.6.0
   next-seo: ^5.15.0
   next-sitemap: ^4.0.6
-  next-transpile-modules: ^10.0.0
   postprocessing: ^6.30.1
   prettier: ^2.8.6
   prettier-eslint: ^15.0.1
@@ -62,8 +63,8 @@ dependencies:
   '@studio-freight/react-lenis': 0.0.12_biqbaboplfbrettd7655fr4n2y
   '@studio-freight/tempus': 0.0.36
   '@theatre/core': 0.6.0
-  '@theatre/r3f': 0.6.0_3bjjztcvytgnqd27bccmvgmeom
-  '@theatre/studio': 0.6.0
+  '@theatre/r3f': 0.6.0_xqpw7jkcoturbhd4xdsoq3syli
+  '@theatre/studio': 0.6.0_@theatre+core@0.6.0
   clsx: 1.2.1
   cross-env: 7.0.3
   duplicate-package-checker-webpack-plugin: 3.0.0
@@ -77,7 +78,6 @@ dependencies:
   next-pwa: 5.6.0_next@13.2.4
   next-seo: 5.15.0_ld2jel3hspngo3u5lti2kgl2sq
   next-sitemap: 4.0.6_next@13.2.4
-  next-transpile-modules: 10.0.0
   postprocessing: 6.30.1_three@0.150.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2048,9 +2048,10 @@ packages:
       three-stdlib: 2.21.8_three@0.150.1
       troika-three-text: 0.47.1_three@0.150.1
       utility-types: 3.10.0
-      zustand: 3.7.2_react@18.2.0
+      zustand: 4.3.6_react@18.2.0
     transitivePeerDependencies:
       - '@types/three'
+      - immer
     dev: false
 
   /@react-three/fiber/8.12.0_73epb4osyabtjyiaeamriercbi:
@@ -2082,10 +2083,12 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-reconciler: 0.27.0_react@18.2.0
       react-use-measure: 2.1.1_biqbaboplfbrettd7655fr4n2y
-      scheduler: 0.21.0
+      scheduler: 0.23.0
       suspend-react: 0.0.8_react@18.2.0
       three: 0.150.1
-      zustand: 3.7.2_react@18.2.0
+      zustand: 4.3.6_react@18.2.0
+    transitivePeerDependencies:
+      - immer
     dev: false
 
   /@rollup/plugin-babel/5.3.1_hqhlikriuul7byjexqnpgcmenu:
@@ -2451,7 +2454,7 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  /@theatre/r3f/0.6.0_3bjjztcvytgnqd27bccmvgmeom:
+  /@theatre/r3f/0.6.0_xqpw7jkcoturbhd4xdsoq3syli:
     resolution: {integrity: sha512-jpEtTWpHhE1XTf/wr48tjpKX3dZQVWtqz9Mplb02ETIeE9eITD7hfiH3laQ8h+mFLPZnv1DhkYzQ2qSWkwoUYg==}
     peerDependencies:
       '@react-three/fiber': '>=7.0.6'
@@ -2462,16 +2465,19 @@ packages:
       three: '>=0.131.3'
     dependencies:
       '@react-three/fiber': 8.12.0_73epb4osyabtjyiaeamriercbi
+      '@theatre/core': 0.6.0
+      '@theatre/studio': 0.6.0_@theatre+core@0.6.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       three: 0.150.1
     dev: false
 
-  /@theatre/studio/0.6.0:
+  /@theatre/studio/0.6.0_@theatre+core@0.6.0:
     resolution: {integrity: sha512-DH53wWSkIDevbYJUybLH5nIx+rFgiWlykYOmDKC9WK9QUQFYRpnaBu4UNIo+RmGZ+I2ZMSHx1RfrfnBJCr1j6A==}
     peerDependencies:
       '@theatre/core': '*'
     dependencies:
+      '@theatre/core': 0.6.0
       '@theatre/dataverse': 0.6.0
     dev: false
 
@@ -3290,6 +3296,7 @@ packages:
     hasBin: true
     dependencies:
       cross-spawn: 7.0.3
+    dev: false
 
   /cross-fetch/3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
@@ -3527,6 +3534,7 @@ packages:
       find-root: 1.1.0
       lodash: 4.17.21
       semver: 5.7.1
+    dev: false
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -3588,6 +3596,7 @@ packages:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.2.1
+    dev: true
 
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
@@ -4985,6 +4994,7 @@ packages:
     transitivePeerDependencies:
       - enquirer
       - supports-color
+    dev: false
 
   /listr2/5.0.8:
     resolution: {integrity: sha512-mC73LitKHj9w6v30nLNGPetZIlfpUniNSsxxrbaPcWOjDb92SHPzJPi/t+v1YC/lxKz/AJ9egOjww0qUuFxBpA==}
@@ -5334,13 +5344,6 @@ packages:
       '@corex/deepmerge': 4.0.37
       minimist: 1.2.8
       next: 13.2.4_dpxg4zawgzznnxdt7it3f5d76m
-    dev: false
-
-  /next-transpile-modules/10.0.0:
-    resolution: {integrity: sha512-FyeJ++Lm2Fq31gbThiRCrJlYpIY9QaI7A3TjuhQLzOix8ChQrvn5ny4MhfIthS5cy6+uK1AhDRvxVdW17y3Xdw==}
-    deprecated: All features of next-transpile-modules are now natively built-in Next.js 13.1. Please use Next's transpilePackages option :)
-    dependencies:
-      enhanced-resolve: 5.12.0
     dev: false
 
   /next/13.2.4_dpxg4zawgzznnxdt7it3f5d76m:
@@ -5923,7 +5926,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       react: 18.2.0
-      scheduler: 0.21.0
+      scheduler: 0.23.0
     dev: false
 
   /react-remove-scroll-bar/2.3.4_react@18.2.0:
@@ -6247,12 +6250,6 @@ packages:
       chokidar: 3.5.3
       immutable: 4.3.0
       source-map-js: 1.0.2
-    dev: false
-
-  /scheduler/0.21.0:
-    resolution: {integrity: sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==}
-    dependencies:
-      loose-envify: 1.4.0
     dev: false
 
   /scheduler/0.23.0:
@@ -6729,6 +6726,7 @@ packages:
   /tapable/2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
+    dev: true
 
   /tar-fs/2.1.1:
     resolution: {integrity: sha512-V0r2Y9scmbDRLCNex/+hYzvp/zyYjvFbHPNgVTKfQvVrb6guiE/fxP+XblDNR011utopbkex2nM4dHNV6GDsng==}
@@ -7501,18 +7499,6 @@ packages:
 
   /zstddec/0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
-    dev: false
-
-  /zustand/3.7.2_react@18.2.0:
-    resolution: {integrity: sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      react: '>=16.8'
-    peerDependenciesMeta:
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /zustand/4.3.6_react@18.2.0:
