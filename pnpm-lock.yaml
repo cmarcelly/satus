@@ -9,6 +9,7 @@ specifiers:
   '@next/bundle-analyzer': ^13.2.4
   '@radix-ui/react-accordion': ^1.1.1
   '@size-limit/preset-app': ^8.2.4
+  '@storyblok/react': ^2.0.17
   '@studio-freight/compono': ^0.0.11
   '@studio-freight/hamo': ^0.6.12
   '@studio-freight/react-lenis': 0.0.12
@@ -42,6 +43,7 @@ specifiers:
 
 dependencies:
   '@radix-ui/react-accordion': 1.1.1_biqbaboplfbrettd7655fr4n2y
+  '@storyblok/react': 2.0.17_biqbaboplfbrettd7655fr4n2y
   '@studio-freight/compono': 0.0.11_eukcqsokfidxqqpq6o65j2h2sq
   '@studio-freight/hamo': 0.6.12_biqbaboplfbrettd7655fr4n2y
   '@studio-freight/react-lenis': 0.0.12_biqbaboplfbrettd7655fr4n2y
@@ -1995,6 +1997,23 @@ packages:
       - supports-color
       - utf-8-validate
     dev: true
+
+  /@storyblok/js/2.1.3:
+    resolution: {integrity: sha512-lUnCygXMmw3VJQldM5JyEFwraKz2OYN+rt1FvvlWn/55DQfbB/DIgnoQ1mpRw4tJoBqGPRgEQJGOH8e/Q1Vm7Q==}
+    dependencies:
+      storyblok-js-client: 5.10.2
+    dev: false
+
+  /@storyblok/react/2.0.17_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-cnKF3YhySD94o1X7LuDOh1ousePWM/SGiQngx4/AcqtDF2GXBD2SBHN9nlQV4AtqtDJUPyFxj6WinBfwI39RAQ==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    dependencies:
+      '@storyblok/js': 2.1.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@studio-freight/compono/0.0.11_eukcqsokfidxqqpq6o65j2h2sq:
     resolution: {integrity: sha512-wwi0883vWgwqSyuPWtBvqyZkrEsW3tFngAHvXaOdnYaTqlkmuxokTprQbjyOJh3SveAVf4Yx4Sm72fEva1d3Wg==}
@@ -5960,6 +5979,10 @@ packages:
     dependencies:
       internal-slot: 1.0.5
     dev: true
+
+  /storyblok-js-client/5.10.2:
+    resolution: {integrity: sha512-Im/xN9PApDvZbONPYv3SpzjfIfXK63uPf6/eYJPvdIWnzCiWY5hlc2UYkoCR4YoaQBBOEBP1UUcGr5QjesOULg==}
+    dev: false
 
   /string-argv/0.3.1:
     resolution: {integrity: sha512-a1uQGz7IyVy9YwhqjZIZu1c8JO8dNIe20xBmSS6qu9kv++k3JGzCVmprbNN5Kn+BgzD5E7YYwg1CcjuJMRNsvg==}

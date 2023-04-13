@@ -1,14 +1,17 @@
+import { storyblokEditable } from '@storyblok/react'
 import { Link } from '@studio-freight/compono'
 import s from './footer.module.scss'
 
-export function Footer() {
+export function Footer({ data }) {
   return (
-    <footer className={s.footer}>
+    <footer className={s.footer} {...storyblokEditable(data)}>
       <div className="layout-block">
         <h2>
-          <Link href="mailto:contact@studiofreight.com">mail</Link>
-          <Link href="/contact">contact</Link>
-          <Link>twitter</Link>
+          {data.links.map(({ text, url }, idx) => (
+            <Link href={url} key={`footer-link-${idx}`}>
+              {text}
+            </Link>
+          ))}
         </h2>
       </div>
     </footer>

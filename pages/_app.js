@@ -1,3 +1,4 @@
+import { apiPlugin, storyblokInit } from '@storyblok/react'
 import { RealViewport } from '@studio-freight/compono'
 import { useLenis } from '@studio-freight/react-lenis'
 import { raf } from '@studio-freight/tempus'
@@ -25,6 +26,12 @@ if (typeof window !== 'undefined') {
   window.scrollTo(0, 0)
   window.history.scrollRestoration = 'manual'
 }
+
+storyblokInit({
+  apiOptions: { region: 'us' },
+  accessToken: process.env.NEXT_PUBLIC_PREVIEW_STORYBLOK_TOKEN,
+  use: [apiPlugin],
+})
 
 function MyApp({ Component, pageProps }) {
   const lenis = useLenis(ScrollTrigger.update)

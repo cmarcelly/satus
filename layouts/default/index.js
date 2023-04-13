@@ -19,6 +19,7 @@ export function Layout({
   children,
   theme = 'light',
   className,
+  layout,
 }) {
   const debug = useDebug()
 
@@ -44,9 +45,9 @@ export function Layout({
         <div className={cn(`theme-${theme}`, s.layout, className)}>
           <Cursor />
           <Scrollbar />
-          <Header />
+          <Header data={layout.headers.header.content} />
           <main className={s.main}>{children}</main>
-          <Footer />
+          <Footer data={layout.footers.footer.content} />
         </div>
       </Lenis>
       {debug && (

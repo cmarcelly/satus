@@ -20,7 +20,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     legacyBrowsers: false,
-    nextScriptWorkers: true,
+    nextScriptWorkers: process.env.NODE_ENV !== 'development',
     urlImports: ['https://cdn.skypack.dev', 'https://unpkg.com'],
   },
   compiler: {
@@ -30,7 +30,7 @@ const nextConfig = {
     // ADD in case you need to import SVGs in next/image component
     // dangerouslyAllowSVG: true,
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['images.ctfassets.net', 'assets.studiofreight.com'],
+    domains: ['a-us.storyblok.com', 'assets.studiofreight.com'],
     formats: ['image/avif', 'image/webp'],
   },
   // add @import 'styles/_functions'; to all scss files.
@@ -117,8 +117,8 @@ const nextConfig = {
             value: 'nosniff',
           },
           {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://app.storyblok.com/",
           },
           {
             key: 'X-XSS-Protection',

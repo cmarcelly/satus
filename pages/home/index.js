@@ -1,4 +1,5 @@
 import * as Accordion from '@radix-ui/react-accordion'
+import { getStoryblokApi, storyblokEditable } from '@storyblok/react'
 import {
   Image,
   Kinesis,
@@ -10,6 +11,7 @@ import {
 import { useMediaQuery, useRect } from '@studio-freight/hamo'
 import { useLenis } from '@studio-freight/react-lenis'
 import { types } from '@theatre/core'
+import { useStoryblok } from 'hooks/use-storyblok'
 import { Layout } from 'layouts/default'
 import { useSheet } from 'lib/theatre'
 import { useTheatre } from 'lib/theatre/hooks/use-theatre'
@@ -39,10 +41,14 @@ const devs = [
   },
 ]
 
-export default function Home() {
+export default function Home({ pageData }) {
   const rectRef = useRef()
   const [setRef, rect] = useRect()
   const isDesktop = useMediaQuery('(min-width: 800px)')
+
+  const { content: pageContent } = useStoryblok(pageData, {
+    resolveRelations: ['headers.header', 'footers.footer'],
+  })
 
   useLenis(
     ({ scroll }) => {
@@ -83,8 +89,8 @@ export default function Home() {
   )
 
   return (
-    <Layout theme="light">
-      <section className={s.home} id="top">
+    <Layout theme="light" layout={pageContent}>
+      <section className={s.home} id="top" {...storyblokEditable(pageData)}>
         <div className={s.theatreRect} ref={theatreRectRef} />
         {isDesktop === true ? (
           <span>only desktop and no SSR</span>
@@ -95,7 +101,7 @@ export default function Home() {
           <span className={s.item}>marquee stuff that scroll continuously</span>
         </Marquee>
         <MarqueeScroll className={s.marquee} inverted repeat={4}>
-          <span className={s.item}>HOLA JORDAN</span>
+          <span className={s.item}>{pageContent.hero.title}</span>
         </MarqueeScroll>
         <Link href="#kinesis">scroll to kinesis</Link>
         <Accordion.Root type="single" collapsible>
@@ -179,9 +185,23 @@ export default function Home() {
 }
 
 export async function getStaticProps() {
+  const storyBlokVars = {
+    slug: 'cdn/stories/pages/homepage',
+    params: {
+      version: 'draft',
+      resolve_relations: ['headers.header', 'footers.footer'],
+    },
+  }
+
+  let { data } = await getStoryblokApi().get(
+    `${storyBlokVars.slug}`,
+    storyBlokVars.params
+  )
+
   return {
     props: {
       id: 'home',
+      pageData: data.story,
     }, // will be passed to the page component as props
   }
 }

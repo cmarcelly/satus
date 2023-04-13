@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
+    "https": "local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.1",
+    "@storyblok/react": "^2.0.17",
     "@studio-freight/compono": "^0.0.11",
     "@studio-freight/hamo": "^0.6.12",
     "@studio-freight/react-lenis": "0.0.12",
