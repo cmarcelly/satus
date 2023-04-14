@@ -71,6 +71,5 @@ export async function getStaticProps({ params }) {
       id,
       pageData,
     },
-    revalidate: 30,
   }
 }
