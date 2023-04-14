@@ -90,7 +90,11 @@ export default function Home({ pageData }) {
 
   return (
     <Layout theme="light" layout={pageContent}>
-      <section className={s.home} id="top" {...storyblokEditable(pageData)}>
+      <section
+        className={s.home}
+        id="top"
+        {...storyblokEditable(pageContent.hero)}
+      >
         <div className={s.theatreRect} ref={theatreRectRef} />
         {isDesktop === true ? (
           <span>only desktop and no SSR</span>
@@ -202,6 +206,7 @@ export async function getStaticProps() {
     props: {
       id: 'home',
       pageData: data.story,
-    }, // will be passed to the page component as props
+    },
+    revalidate: 30,
   }
 }

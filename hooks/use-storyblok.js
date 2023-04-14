@@ -18,6 +18,8 @@ const removeKey = (item, key) => {
 /* eslint-enable */
 
 export const checkNestedBlock = (story) => {
+  if (!story.content) return {}
+
   if (story.content.body) {
     const remap = story.content.body.map((item) => {
       return {
