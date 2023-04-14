@@ -34,7 +34,7 @@ export async function getStaticPaths() {
     .forEach(({ slug }) => paths.push({ params: { slug } }))
 
   return {
-    paths: paths,
+    paths,
     fallback: 'blocking',
   }
 }
