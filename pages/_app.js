@@ -3,6 +3,7 @@ import { useLenis } from '@studio-freight/react-lenis'
 import { raf } from '@studio-freight/tempus'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { useInitCart } from 'hooks/use-cart'
 import { GTM_ID } from 'lib/analytics'
 import { useStore } from 'lib/store'
 import { ProjectProvider, RafDriverProvider } from 'lib/theatre'
@@ -29,7 +30,7 @@ if (typeof window !== 'undefined') {
 function MyApp({ Component, pageProps }) {
   const lenis = useLenis(ScrollTrigger.update)
   useEffect(ScrollTrigger.refresh, [lenis])
-
+  useInitCart()
   const navIsOpened = useStore(({ navIsOpened }) => navIsOpened)
 
   useEffect(() => {

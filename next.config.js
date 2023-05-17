@@ -30,7 +30,11 @@ const nextConfig = {
     // ADD in case you need to import SVGs in next/image component
     // dangerouslyAllowSVG: true,
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['images.ctfassets.net', 'assets.studiofreight.com'],
+    domains: [
+      'images.ctfassets.net',
+      'assets.studiofreight.com',
+      'cdn.shopify.com',
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   // add @import 'styles/_functions'; to all scss files.

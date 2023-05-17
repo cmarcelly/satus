@@ -1,9 +1,10 @@
-import { Link } from '@studio-freight/compono'
 import cn from 'clsx'
 import { Navigation } from 'components/navigation'
+import { useCart } from 'hooks/use-cart'
 import { useStore } from 'lib/store'
 import { forwardRef } from 'react'
 import { shallow } from 'zustand/shallow'
+import { Cart } from './cart'
 import s from './header.module.scss'
 
 export const Header = forwardRef((_, ref) => {
@@ -11,6 +12,9 @@ export const Header = forwardRef((_, ref) => {
     ({ navIsOpened, setNavIsOpened }) => [navIsOpened, setNavIsOpened],
     shallow
   )
+  const setToggleCart = useStore((state) => state.setToggleCart)
+  const cart = useCart()
+  const itemsInCart = cart.utils.countItemsInCartUI()
 
   return (
     <header className={s.header} ref={ref}>
@@ -23,10 +27,18 @@ export const Header = forwardRef((_, ref) => {
         >
           menu
         </button>
-        <div>
-          <Link href="/">home</Link>/<Link href="/gsap">gsap</Link>/
-          <Link href="/contact">contact</Link>
-        </div>
+        <button
+          className={s['cart-cta']}
+          id="carts-cta"
+          aria-label="Toggle Cart"
+          onClick={() => {
+            setToggleCart(true)
+          }}
+        >
+          <p className={'eyebrow'}>{itemsInCart === 0 ? '' : itemsInCart}</p>
+          -cart
+        </button>
+        <Cart />
       </div>
     </header>
   )

@@ -18,4 +18,9 @@
     position: relative;
     z-index: 2;
   }
+
+  .cart-cta {
+    display: flex;
+    justify-content: space-between;
+  }
 }
