@@ -250,6 +250,79 @@ export const useCart = () => {
         0
       )
     },
+
+    // Fix coming soon
+    // changeSelectedVariantUI: async function changeSelectedVariantUI(
+    //   data,
+    //   product,
+    //   newOption
+    // ) {
+    //   let newData = { ...data }
+    //   let newQuantity,
+    //     lineItemId,
+    //     newVariantId,
+    //     staleVariantID = null
+
+    //   const checkExistingProduct = newData.products.find(
+    //     (item) => item.options.option === newOption.option
+    //   )
+
+    //   if (checkExistingProduct !== undefined) {
+    //     // if option is already in cart
+    //     // update exsisting option with new quantity
+    //     // delete the stale option
+    //     const itemToUpdate = newData.products.findIndex(
+    //       (item) => item.id === checkExistingProduct.id
+    //     )
+    //     const itemToRemove = newData.products.findIndex(
+    //       (item) => item.id === product.id
+    //     )
+
+    //     newQuantity = Math.min(
+    //       product.quantity + checkExistingProduct.quantity,
+    //       newOption.availableQuantity
+    //     )
+    //     newData.products[itemToUpdate] = {
+    //       ...newData.products[itemToUpdate],
+    //       quantity: newQuantity,
+    //     }
+    //     newData.products = newData.products.filter(
+    //       (_, id) => itemToRemove !== id
+    //     )
+
+    //     lineItemId = checkExistingProduct.id
+    //     newVariantId = checkExistingProduct.options.id
+    //     staleVariantID = product.id
+    //   } else {
+    //     // If option is not already in cart
+    //     // just change option for the new option
+    //     const getItem = newData.products.findIndex(
+    //       (item) => item.id === product.id
+    //     )
+
+    //     newQuantity = Math.min(product.quantity, newOption.availableQuantity)
+    //     newData.products[getItem] = {
+    //       ...newData.products[getItem],
+    //       options: newOption,
+    //       quantity: newQuantity,
+    //     }
+    //     lineItemId = product.id
+    //     newVariantId = newOption.id
+    //     staleVariantID = product.id
+    //   }
+
+    //   this.updateItemQuantityUI(
+    //     newData,
+    //     newQuantity,
+    //     lineItemId,
+    //     newVariantId,
+    //     false
+    //   )
+    //   this.removeItemUI(data, staleVariantID, false)
+
+    //   newData.totalPrice = this.updateCartPriceUI(newData)
+    //   mutate('/api/cart/fetch', newData, false)
+    // },
   }
 
   return {
