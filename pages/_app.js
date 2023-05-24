@@ -1,7 +1,7 @@
 import { apiPlugin, storyblokInit } from '@storyblok/react'
 import { RealViewport } from '@studio-freight/compono'
 import { useLenis } from '@studio-freight/react-lenis'
-import { raf } from '@studio-freight/tempus'
+import Tempus from '@studio-freight/tempus'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { GTM_ID } from 'lib/analytics'
@@ -18,7 +18,7 @@ if (typeof window !== 'undefined') {
   // merge rafs
   gsap.ticker.lagSmoothing(0)
   gsap.ticker.remove(gsap.updateRoot)
-  raf.add((time) => {
+  Tempus?.add((time) => {
     gsap.updateRoot(time / 1000)
   }, 0)
 
@@ -73,7 +73,7 @@ function MyApp({ Component, pageProps }) {
       <RealViewport />
       <ProjectProvider
         id="Satus"
-        config="/config/Satus-2023-04-12T13_11_45.json"
+        config="/config/Satus-2023-04-17T12_55_21.json"
       >
         <RafDriverProvider id="default">
           <Component {...pageProps} />

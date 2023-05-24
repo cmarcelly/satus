@@ -5,35 +5,30 @@ import { useTheatre } from 'lib/theatre/hooks/use-theatre'
 import { Studio } from 'lib/theatre/studio'
 import s from './theatre.module.scss'
 
-const channel = typeof window !== 'undefined' && new BroadcastChannel('theatre')
+function sanitizeConfig(config = {}) {
+  return Object.fromEntries(
+    Object.entries(config).map(([key, value]) => {
+      const { type } = value
 
-function TheatreObject({ address, config }) {
-  const parsedAddress = JSON.parse(address)
-  const parsedConfig = JSON.parse(config)
+      if (type) {
+        return [
+          key,
+          types[type](
+            type === 'compound' ? sanitizeConfig(value.props) : value.default,
+            type === 'stringLiteral' ? value.valuesAndLabels : value
+          ),
+        ]
+      }
+      return [key, value]
+    })
+  )
+}
 
-  const { sheetId, sheetInstanceId, objectKey } = parsedAddress
+function TheatreObject({ objectAddress, config }) {
+  const { sheetId, sheetInstanceId, objectKey } = JSON.parse(objectAddress)
 
   const sheet = useSheet(sheetId, sheetInstanceId)
-  useTheatre(
-    sheet,
-    objectKey,
-    Object.fromEntries(
-      Object.entries(parsedConfig).map(([key, value]) => [
-        key,
-        value.type ? types[value.type](value.default, { ...value }) : value,
-      ])
-    ),
-    {
-      onValuesChange: (values) => {
-        channel.postMessage({
-          address,
-          values,
-        })
-      },
-      deps: [],
-      external: true,
-    }
-  )
+  useTheatre(sheet, objectKey, sanitizeConfig(config))
 }
 
 export default function Theatre() {
@@ -46,20 +41,23 @@ export default function Theatre() {
   // }, [debug])
 
   const list = useOrchestra(({ theatreList }) =>
-    Object.entries(theatreList).map(([address, config]) => ({
-      address,
+    Object.entries(theatreList).map(([objectAddress, config]) => ({
+      objectAddress,
       config,
     }))
   )
 
   return (
-    // debug === true && (
     <div className={s.theatre}>
-      <Studio />
-      {list.map(({ address, config }) => (
-        <TheatreObject key={address} address={address} config={config} />
-      ))}
+      <Studio>
+        {list.map(({ objectAddress, config }) => (
+          <TheatreObject
+            key={objectAddress}
+            objectAddress={objectAddress}
+            config={config}
+          />
+        ))}
+      </Studio>
     </div>
-    // )
   )
 }
