@@ -1,10 +1,16 @@
+import { getStoryblokApi, storyblokEditable } from '@storyblok/react'
+import { useStoryblok } from 'hooks/use-storyblok'
 import { Layout } from 'layouts/default'
 import s from './home.module.scss'
 
-export default function Home() {
+export default function Home({ pageData }) {
+  const { content: pageContent } = useStoryblok(pageData, {
+    resolveRelations: ['headers.header', 'footers.footer'],
+  })
+
   return (
-    <Layout theme="light">
-      <section className={s.content}>
+    <Layout theme="light" layout={pageContent}>
+      <section className={s.content} {...storyblokEditable(pageContent.hero)}>
         <h1 className={s.title}>satus</h1>
       </section>
     </Layout>

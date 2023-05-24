@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.1",
+    "@storyblok/react": "^2.0.18",
     "@studio-freight/compono": "^0.0.17",
     "@studio-freight/hamo": "^0.6.14",
     "@studio-freight/react-lenis": "0.0.20",
