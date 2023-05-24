@@ -1,10 +1,12 @@
 import { Layout } from 'layouts/default'
-import Shopify from 'lib/shopify'
+import s from './home.module.scss'
 
 export default function Home() {
   return (
-    <Layout>
-      <h1>satus</h1>
+    <Layout theme="light">
+      <section className={s.content}>
+        <h1 className={s.title}>satus</h1>
+      </section>
     </Layout>
   )
 }

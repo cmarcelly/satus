@@ -1,28 +1,10 @@
-.hero {
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
   .title {
-    font-size: desktop-vw(60px);
-    margin-bottom: desktop-vw(50px);
-    margin-top: var(--header-height);
-    text-align: center;
-  }
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  pointer-events: all;
-  margin-bottom: desktop-vw(200px);
-
-  .image {
-    height: desktop-vw(536px);
-    position: relative;
-    border: 2px solid var(--theme-contrast);
-    box-sizing: border-box;
-    border-radius: 40px;
-    overflow: hidden;
-
-    img {
-      object-fit: contain;
-    }
+    flex-grow: 1;
   }
 }
