@@ -7,8 +7,11 @@ export function Footer({ data }) {
     <footer className={s.footer} {...storyblokEditable(data)}>
       <div className="layout-block">
         <h2>
-          {data.links.map(({ text, url }, idx) => (
-            <Link href={url} key={`footer-link-${idx}`}>
+          {data.links.map(({ text, link }, idx) => (
+            <Link
+              href={link?.url ? link.url : link?.cached_url.split('/').pop()}
+              key={`footer-link-${idx}`}
+            >
               {text}
             </Link>
           ))}

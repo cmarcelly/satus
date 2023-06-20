@@ -29,10 +29,15 @@ export function Navigation() {
 
   return (
     <Lenis className={cn(s.navigation, !navIsOpened && s.closed)}>
-      <div className={s.content}>
+      <div className={cn(s.content, 'layout-block')}>
+        <button
+          onClick={() => {
+            setNavIsOpened(false)
+          }}
+        >
+          close
+        </button>
         <Link href="/">home</Link>
-        <Link href="/gsap">gsap</Link>
-        <Link href="/contact">contact</Link>
       </div>
     </Lenis>
   )

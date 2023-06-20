@@ -11,7 +11,7 @@ export default function Home({ pageData }) {
   return (
     <Layout theme="light" layout={pageContent}>
       <section className={s.content} {...storyblokEditable(pageContent.hero)}>
-        <h1 className={s.title}>satus</h1>
+        <h1 className={s.title}>{pageContent.hero.title}</h1>
       </section>
     </Layout>
   )

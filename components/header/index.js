@@ -25,9 +25,13 @@ export const Header = forwardRef(({ data }, ref) => {
           menu
         </button>
         <div>
-          {data.links.map(({ text, url }, idx) => (
-            <Link href={url} key={`header-link-${idx}`}>
+          {data.links.map(({ text, link }, idx) => (
+            <Link
+              href={link?.url ? link.url : link?.cached_url.split('/').pop()}
+              key={`header-link-${idx}`}
+            >
               {text}
+              {console.log('headerLINK', link)}
             </Link>
           ))}
         </div>
