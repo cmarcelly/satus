@@ -1,17 +1,25 @@
 import { apiPlugin, storyblokInit } from '@storyblok/react'
 import { RealViewport } from '@studio-freight/compono'
+import { useDebug } from '@studio-freight/hamo'
 import { useLenis } from '@studio-freight/react-lenis'
 import Tempus from '@studio-freight/tempus'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { GTM_ID } from 'lib/analytics'
-import { useStore } from 'lib/store'
-import { ProjectProvider, RafDriverProvider } from 'lib/theatre'
+import { GTM_ID } from 'libs/analytics'
+import { useStore } from 'libs/store'
+import { ProjectProvider, RafDriverProvider } from 'libs/theatre'
+import dynamic from 'next/dynamic'
 import Script from 'next/script'
 import { useEffect } from 'react'
 import 'styles/global.scss'
 
+const Orchestra = dynamic(
+  () => import('libs/orchestra').then(({ Orchestra }) => Orchestra),
+  { ssr: false }
+)
+
 if (typeof window !== 'undefined') {
+  gsap.defaults({ ease: 'none' })
   gsap.registerPlugin(ScrollTrigger)
   ScrollTrigger.defaults({ markers: process.env.NODE_ENV === 'development' })
 
@@ -47,6 +55,8 @@ function MyApp({ Component, pageProps }) {
     }
   }, [lenis, navIsOpened])
 
+  const debug = useDebug()
+
   return (
     <>
       {/* Google Tag Manager - Global base code */}
@@ -77,6 +87,11 @@ function MyApp({ Component, pageProps }) {
       >
         <RafDriverProvider id="default">
           <Component {...pageProps} />
+          {debug && (
+            <>
+              <Orchestra />
+            </>
+          )}
         </RafDriverProvider>
       </ProjectProvider>
     </>

@@ -20,6 +20,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     legacyBrowsers: false,
+    // storyblok prewiew
     nextScriptWorkers: process.env.NODE_ENV !== 'development',
     urlImports: ['https://cdn.skypack.dev', 'https://unpkg.com'],
   },
