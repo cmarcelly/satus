@@ -1,7 +1,7 @@
 import { enc } from 'crypto-js'
 import AES from 'crypto-js/aes'
 import { GraphQLClient } from 'graphql-request'
-import { internalServerError, success } from 'lib/api/responses'
+import { internalServerError, success } from 'libs/api/responses'
 
 const query = `mutation createDiscount($basicCodeDiscount: DiscountCodeBasicInput!) {
   discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {

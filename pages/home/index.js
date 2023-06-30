@@ -1,5 +1,5 @@
 import { Layout } from 'layouts/default'
-import Shopify from 'lib/shopify'
+import Shopify from 'libs/shopify'
 import s from './home.module.scss'
 
 export default function Home() {

@@ -1,5 +1,5 @@
-import { internalServerError, success } from 'lib/api/responses'
-import Shopify from 'lib/shopify'
+import { internalServerError, success } from 'libs/api/responses'
+import Shopify from 'libs/shopify'
 
 const store = new Shopify()
 

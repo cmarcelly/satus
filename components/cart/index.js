@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { useCart } from 'hooks/use-cart'
 import useClickOutsideEvent from 'hooks/use-click-outside'
-import { useStore } from 'lib/store'
+import { useStore } from 'libs/store'
 import Image from 'next/image'
 import { useRef } from 'react'
 import s from './cart.module.scss'
